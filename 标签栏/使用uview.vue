@@ -1,7 +1,6 @@
 <template>
 	<view class="content">
-		<u-tabs name="cate_name" count="cate_count" :list="list" :is-scroll="true" :current="activeIndex"
-			@change="change">
+		<u-tabs :list="list" :is-scroll="true" :current="activeIndex" @change="change" :duration='0.3'>
 		</u-tabs>
 		<view class="swiper">
 			<swiper class="swiper-container" :current="activeIndex" @change="changeCurrentIndex">
