@@ -1,10 +1,10 @@
 <template>
-  <div class="percentloop" id="percentloop">
+  <div class="percentloop" ref="percentloop">
     <div class="circle-left">
-      <div id="leftcontent"></div>
+      <div ref="leftcontent"></div>
     </div>
     <div class="circle-right">
-      <div id="rightcontent"></div>
+      <div ref="rightcontent"></div>
     </div>
     <div class="content">
       <slot></slot>
@@ -19,6 +19,8 @@ const props = defineProps({
   /**
    * 说明：进度百分比
    * 可选值：0-100
+   * 是否必填：否
+   * 默认值：0
    */
   percentNum: {
     type: [String, Number],
@@ -28,6 +30,8 @@ const props = defineProps({
   /**
    * 说明：动画加载速度
    * 可选值：推荐2-5
+   * 是否必填：否
+   * 默认值：4
    */
   speed: {
     type: [String, Number],
@@ -35,7 +39,9 @@ const props = defineProps({
     default: 4,
   },
   /**
-   * 说明：圆环进度条大小
+   * 说明：圆环进度条大小(单位：px)
+   * 默认值：260
+   * 是否必填：否
    */
   size: {
     type: [String, Number],
@@ -50,6 +56,11 @@ const data = reactive({
   timeId: null,
   animationing: false,
 });
+
+// 代替ID获取dom元素
+const percentloop = ref(null);
+const leftcontent = ref(null);
+const rightcontent = ref(null);
 
 const methods = reactive({
   transformToDeg(percent) {
@@ -72,13 +83,11 @@ const methods = reactive({
   },
   rotateLeft(deg) {
     // 大于180时，执行的动画
-    var leftcontent = document.getElementById("leftcontent");
-    leftcontent.style.transform = "rotate(" + (deg - 180) + "deg)";
+    leftcontent.value.style.transform = "rotate(" + (deg - 180) + "deg)";
   },
   rotateRight(deg) {
     // 小于180时，执行的动画
-    var rightcontent = document.getElementById("rightcontent");
-    rightcontent.style.transform = "rotate(" + deg + "deg)";
+    rightcontent.value.style.transform = "rotate(" + deg + "deg)";
   },
   goRotate(deg) {
     data.animationing = true;
@@ -125,9 +134,8 @@ const methods = reactive({
 
 onMounted(() => {
   methods.goRotate(methods.transformToDeg(props.percentNum));
-  var percentloop = document.getElementById("percentloop");
-  percentloop.style.height = props.size + "px";
-  percentloop.style.width = props.size + "px";
+  percentloop.value.style.height = props.size + "px";
+  percentloop.value.style.width = props.size + "px";
 });
 
 watch(
