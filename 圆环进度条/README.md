@@ -31,6 +31,16 @@ speed: {
 	required: false,
 	default: 4,
 },
+/**
+ * 说明：圆环进度条大小(单位：px)
+ * 默认值：260
+ * 是否必填：否
+ */
+size: {
+	type: [String, Number],
+	required: false,
+	default: 260,
+},
 ```
 
 ### 其它配置：
@@ -38,3 +48,5 @@ speed: {
 1、设置进度条颜色
 
 2、设置进度条宽度
+
+3、圆环内部背景颜色
