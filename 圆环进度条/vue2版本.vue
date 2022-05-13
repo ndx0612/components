@@ -15,6 +15,7 @@
 
 <script>
 export default {
+  name:'ProgressBar',
   props: {
     /**
      * 说明：进度百分比
