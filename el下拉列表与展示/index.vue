@@ -2,8 +2,8 @@
   <div>
     <div class="choose-person m-[30px]">
       <span class="choose-text">添加维护人：</span>
-      <el-select v-model="data.region" placeholder="添加维护人" @close="ManageData.handleClose(index)" closable>
-        <el-option v-for="item in data.computedTeacherList" :key="item.id" :label="item.name" :value="item.id" :disabled="data.maintainerList.some((v) => v.id == item.id)" />
+      <el-select v-model="data.region" placeholder="添加维护人">
+        <el-option v-for="item in data.teacherList" :key="item.id" :label="item.name" :value="item.id" :disabled="data.maintainerList.some((v) => v.id == item.id)" />
       </el-select>
       <el-button type="primary" class="ml-[8px]" @click="methods.addRegion">添加</el-button>
     </div>
@@ -24,7 +24,7 @@ const data = reactive({
       name: "李六",
     },
   ], // 已经添加的维护人列表
-  computedTeacherList: [
+  teacherList: [
     {
       id: 1001,
       name: "张三",
@@ -49,7 +49,7 @@ const methods = reactive({
   addRegion() {
     console.log(data.region);
     if (data.region) {
-      data.computedTeacherList.forEach((item) => {
+      data.teacherList.forEach((item) => {
         if (item.id == data.region) {
           data.maintainerList.push(item);
           data.region = "";
