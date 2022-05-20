@@ -1,3 +1,4 @@
+// js控制宽度变化
 function changeUp(dom, time, width_px) {
   var _this = this;
   var width = dom.offsetWidth;

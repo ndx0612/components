@@ -6,7 +6,7 @@
     <div class="circle-right">
       <div ref="rightcontent"></div>
     </div>
-    <div class="content">
+    <div class="internal">
       <slot></slot>
     </div>
   </div>
@@ -19,8 +19,6 @@ const props = defineProps({
   /**
    * 说明：进度百分比
    * 可选值：0-100
-   * 是否必填：否
-   * 默认值：0
    */
   percentNum: {
     type: [String, Number],
@@ -30,8 +28,6 @@ const props = defineProps({
   /**
    * 说明：动画加载速度
    * 可选值：推荐2-5
-   * 是否必填：否
-   * 默认值：4
    */
   speed: {
     type: [String, Number],
@@ -40,8 +36,6 @@ const props = defineProps({
   },
   /**
    * 说明：圆环进度条大小(单位：px)
-   * 默认值：260
-   * 是否必填：否
    */
   size: {
     type: [String, Number],
@@ -57,7 +51,7 @@ const data = reactive({
   animationing: false,
 });
 
-// 代替ID获取dom元素
+// 获取dom元素
 const percentloop = ref(null);
 const leftcontent = ref(null);
 const rightcontent = ref(null);
@@ -83,11 +77,13 @@ const methods = reactive({
   },
   rotateLeft(deg) {
     // 大于180时，执行的动画
-    leftcontent.value.style.transform = "rotate(" + (deg - 180) + "deg)";
+    if (leftcontent.value?.style)
+      leftcontent.value.style.transform = "rotate(" + (deg - 180) + "deg)";
   },
   rotateRight(deg) {
     // 小于180时，执行的动画
-    rightcontent.value.style.transform = "rotate(" + deg + "deg)";
+    if (rightcontent.value?.style)
+      rightcontent.value.style.transform = "rotate(" + deg + "deg)";
   },
   goRotate(deg) {
     data.animationing = true;
@@ -128,7 +124,6 @@ const methods = reactive({
     data.percent = props.percentNum; // 百分比数据滚动动画
     data.animationing = false;
     clearInterval(data.timeId);
-    // this.$emit("animationFinished"); // 动画完成的回调
   },
 });
 
@@ -137,7 +132,6 @@ onMounted(() => {
   percentloop.value.style.height = props.size + "px";
   percentloop.value.style.width = props.size + "px";
 });
-
 watch(
   () => props.percentNum,
   (val) => {
@@ -178,7 +172,8 @@ watch(
       transform-origin: left center;
     }
   }
-  .content {
+  // 组件类名别用常用的
+  .internal {
     position: absolute;
     // 设置进度条宽度
     top: 3%;
