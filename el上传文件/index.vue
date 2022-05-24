@@ -59,9 +59,11 @@ const methods = reactive({
     console.log(file);
   },
 
-  // 预览文件
+  // 选择文件
   handleStart(file) {
-    console.log(file);
+    // 预览文件（兼容火狐，safari浏览器等多个浏览器）
+    const tempPage = window.open("_blank"); // 先打开一个空页面
+    tempPage.location = file.url; //目标的页面地址
   },
 });
 </script>
