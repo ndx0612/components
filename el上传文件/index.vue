@@ -8,6 +8,7 @@
     <!-- :on-change：上传文件时候触发 -->
     <!-- :on-remove：点击删除触发 -->
     <!-- :on-preview：点击文件触发 -->
+    <!-- accept=".xls,.xlsx" 上传文件类型 -->
     <el-upload class="upload-demo" drag multiple action="" :http-request="()=>{}" :file-list="data.fileList" :on-change="methods.handleChange" :on-remove="methods.handleRemove" :on-preview="methods.handleStart">
       <el-icon class="el-icon--upload">
         <upload-filled />
