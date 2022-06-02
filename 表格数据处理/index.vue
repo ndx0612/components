@@ -31,6 +31,28 @@ const readFile = (file) => {
     };
   });
 };
+
+// 下载表格坏数据
+const downXLSX = () => {
+  const _data = [];
+  _data[0] = ["序号", "姓名", "手机号", "职务", "学校名称", "创建时间"];
+  res.data.forEach((item, index) => {
+    console.log(item);
+    _data[index + 1] = [
+      item.contactId,
+      item.name,
+      item.phoneNumber,
+      item.post,
+      item.schoolName,
+      util.formatDate(item.createTime, "yyyy-MM-dd hh:mm"),
+    ];
+  });
+  const ws = XLSX.utils.aoa_to_sheet(_data);
+  console.log(ws);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+  XLSX.writeFile(wb, "SheetJS.xlsx");
+};
 </script>
 
 <style>
