@@ -55,6 +55,19 @@ const methods = reactive({
     });
   },
 
+  // 图片转base64方法
+  // handleChange(uploadFile) {
+  //   console.log(uploadFile);
+  //   var reader = new FileReader();
+  //   reader.readAsDataURL(uploadFile.raw);
+  //   reader.onload = () => {
+  //     console.log(reader.result);
+  //   };
+  //   reader.onerror = function (error) {
+  //     console.log("Error: ", error);
+  //   };
+  // },
+
   // 删除文件
   handleRemove(file) {
     console.log(file);
