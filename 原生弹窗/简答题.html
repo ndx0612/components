@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .sa_border-bottom {
+      border-bottom: solid 1px #f00;
+      flex: 1;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+
+    .sa_question-dialog {
+      width: 640px;
+      padding: 20px;
+      border-radius: 5px;
+      background-color: rgb(255, 255, 255);
+      margin: 50px auto;
+    }
+
+    .sa_dialog-question {
+      padding: 20px;
+      background-color: rgb(245, 247, 250);
+      margin-top: 20px;
+    }
+
+    .sa_question-dialog-bottom {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .el-textarea__inner:focus {
+      outline: 0;
+      border-color: #409eff;
+      box-sizing: border-box;
+    }
+
+    .el-textarea__inner {
+      padding: 5px 15px !important;
+      box-sizing: border-box;
+      margin-top: 20px;
+    }
+
+    .el-button {
+      display: inline-block;
+      line-height: 1;
+      white-space: nowrap;
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #dcdfe6;
+      color: #606266;
+      -webkit-appearance: none;
+      text-align: center;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      outline: 0;
+      margin: 0;
+      -webkit-transition: .1s;
+      transition: .1s;
+      font-weight: 500;
+      padding: 12px 20px;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+
+    .el-button--primary {
+      color: #fff;
+      background-color: #409eff;
+      border-color: #409eff;
+    }
+
+    .el-button--primary {
+      color: #fff;
+      background-color: #409eff;
+      border-color: #409eff;
+    }
+
+    .el-button--primary:hover {
+      background: #66b1ff;
+      border-color: #66b1ff;
+      color: #fff;
+    }
+
+    .el-dialog__wrapper {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, .5);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="question-module-7"></div>
+  <div class="question-module-7"></div>
+  <div class="question-module-7"></div>
+  <div id="sa_question-module" class="el-dialog__wrapper" style="z-index: 2021; display: none;" onclick="closedialog()">
+    <div class="sa_question-dialog" onclick="stopBubbling()">
+      <div>
+        题目
+      </div>
+      <div id="sa_dialog-question" class="sa_dialog-question">
+        现在不少品牌的酸奶还是打着“长寿”的旗号，经过学习我们已经知道酸奶并不会让人类长寿。如果您是广告商，请写一段文案从科学的角度介绍酸奶
+      </div>
+      <textarea autocomplete="off" placeholder="请输入答案" class="el-textarea__inner"
+        style="height: 220px; width: 640px;"></textarea>
+      <div class="sa_question-dialog-bottom">
+        <button type="button" class="el-button el-button--default" style="margin-right: 7px;" onclick="closedialog()">
+          <span>取消</span>
+        </button>
+        <button type="button" class="el-button el-button--primary">
+          <span>提交</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script>
+    // 题目初始化
+    const onloadQuestion = function () {
+      var dialog = document.createElement("div"); // 创建新的元素
+      //     dialog.innerHTML = `
+      //       `; // 设置元素内容
+      var bodyEle = document.body;
+      bodyEle.appendChild(dialog);
+
+
+
+      // 获取所有的DOM元素
+      let module = document.getElementsByClassName("question-module-7")
+      console.log(module.length);
+
+      // 获取所有key
+      let keyArr = []
+      for (var i = 0; module.length > i; i++) {
+        keyArr.push(module[i].getAttribute("key"))
+      }
+
+      for (let i = 0; i < module.length; i++) {
+        console.log(module[i]);
+        var para = document.createElement("div"); // 创建新的元素
+        para.innerHTML = `
+          <div style="margin-left: 20px;">
+            ${questionTem[i].questionText}：
+          </div>
+          <div style="display: flex;">
+            <div>答：</div>
+            <div class="sa_border-bottom" onclick='openDialog(${i})'></div>
+          </div>
+        `; // 设置元素内容
+        module[i].appendChild(para);
+      }
+    }
+
+    // 通过请求获取题目
+    var questionTem = [
+      {
+        key: "",
+        questionText: "如果您是广告商，请写一段文案从科学的角度介绍酸奶",
+        answer: "",
+      },
+      {
+        key: "",
+        questionText: "简答题2",
+        answer: "",
+      },
+      {
+        key: "",
+        questionText: "简答题3",
+        answer: "",
+      }
+    ]
+
+    function openDialog(value) {
+      console.log("点击打开弹窗");
+      document.getElementById("sa_question-module").style.display = "block";
+      document.getElementById("sa_dialog-question").innerText = questionTem[value].questionText; // 会以纯文本的形式显示出来
+    }
+
+    // 关闭弹窗
+    function closedialog() {
+      document.getElementById("sa_question-module").style.display = "none";
+    }
+
+    // 阻止事件冒泡, 防止点击弹窗内部关闭
+    function stopBubbling() {
+      window.event ? window.event.cancelBubble = true : e.stopPropagation();
+    }
+    window.onload = onloadQuestion
+  </script>
+</body>
+
+</html>
