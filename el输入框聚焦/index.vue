@@ -1,7 +1,7 @@
 <template>
   <div class="w-[300px] m-[20px]">
     <el-input ref="ref_inputRemark" v-show="showInput" v-model="inputText" placeholder="Please input" @blur="editRemark" />
-    <span v-if="!showInput" @click="editOpen">{{inputText}}</span>
+    <span class="min-h-[33px] flex items-center" v-if="!showInput" @click="editOpen">{{inputText}}</span>
   </div>
 </template>
 
