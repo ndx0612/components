@@ -9,7 +9,7 @@
     <!-- :on-remove：点击删除触发 -->
     <!-- :on-preview：点击文件触发 -->
     <!-- accept=".xls,.xlsx" 上传文件类型 -->
-    <el-upload class="upload-demo" drag multiple action="" :http-request="()=>{}" :file-list="data.fileList" :on-change="methods.handleChange" :on-remove="methods.handleRemove" :on-preview="methods.handleStart">
+    <el-upload class="upload-demo" drag multiple action="" :http-request="uploadRequest" :file-list="data.fileList" :on-change="methods.handleChange" :on-remove="methods.handleRemove" :on-preview="methods.handleStart">
       <el-icon class="el-icon--upload">
         <upload-filled />
       </el-icon>
@@ -42,17 +42,55 @@ const data = reactive({
   ], // 上传文件列表
 });
 
+/**
+ * @description: 文件上传默认方法
+ * @param {*} content
+ */
+const uploadRequest = (content) => {
+  let url = "/public/upload/extFileUpload";
+  var para = new FormData();
+  para.append("file", content.file);
+  para.append("extFileName", content.file.name);
+  axios.defaults.timeout = null; // 响应时间
+  axios({
+    method: "post",
+    url,
+    data: para,
+    onUploadProgress: (progressEvent) => {
+      const complete = parseInt(
+        ((progressEvent.loaded / progressEvent.total) * 100) | 0,
+        10
+      );
+      content.onProgress({ percent: complete });
+    },
+  })
+    .then((res) => {
+      if (!res.data.errCode) {
+        data.extFileList[data.extFileList.length - 1].url =
+          proxy.util.convertImgUrl(res.data.url);
+        data.extFileList[data.extFileList.length - 1].id = res.data.id;
+        data.extFileList[data.extFileList.length - 1].status = "ready";
+      } else {
+        content.onError("文件上传失败");
+      }
+    })
+    .catch((res) => {
+      content.onError("文件上传失败");
+      page.uploadLoading = false;
+    });
+};
+
 const methods = reactive({
   // 上传文件
   handleChange(uploadFile) {
-    // 格式转换，得到后台需要的参数
-    var para = new FormData();
-    para.append("extFileName", uploadFile.name);
-    para.append("file", uploadFile.raw);
-    console.log(para);
-    proxy.$axios.post("/public/upload/extFileUpload", para).then((res) => {
-      console.log(res);
-    });
+    // // 格式转换，得到后台需要的参数
+    // var para = new FormData();
+    // para.append("extFileName", uploadFile.name);
+    // para.append("file", uploadFile.raw);
+    // console.log(para);
+    // proxy.$axios.post("/public/upload/extFileUpload", para).then((res) => {
+    //   console.log(res);
+    // });
   },
 
   // 图片转base64方法
