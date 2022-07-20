@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 将courseId和studentId相同的合并
+    const arr1 = [
+      { son_id: 1, bumen: '销售部', courseId: 1, studentId: 101 },
+      { son_id: 2, bumen: '服务部', courseId: 2, studentId: 101 },
+      { son_id: 3, bumen: '⼈事部', courseId: 3, studentId: 102 },
+      { son_id: 4, bumen: '部门1', courseId: 3, studentId: 101 },
+      { son_id: 5, bumen: '部门2', courseId: 3, studentId: 101 },
+      { son_id: 6, bumen: '部门3', courseId: 3, studentId: 101 }
+    ];
+
+    const res = [];
+    const includesArrayId = [];
+    arr1.forEach(item => {
+      let mergeStr = item.courseId + '_' + item.studentId;
+      let index = includesArrayId.indexOf(mergeStr)
+      if (index === -1) {
+        // 如果不存在courseId和studentId相同
+        res.push(item)
+        includesArrayId.push(mergeStr)
+      } else {
+        if (Boolean(res[index].child)) {
+          let obj = {
+            son_id: item.son_id,
+            bumen: item.bumen,
+          }
+          res[index].child.push(obj)
+        } else {
+          let obj = {
+            courseId: res[index].courseId,
+            studentId: res[index].studentId,
+            child: [{
+              son_id: res[index].son_id,
+              bumen: res[index].bumen,
+            }, {
+              son_id: item.son_id,
+              bumen: item.bumen,
+            }]
+          }
+          res[index] = obj
+        }
+      }
+    })
+    console.log(res);
+  </script>
+</body>
+
+</html>
