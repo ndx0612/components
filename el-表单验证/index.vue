@@ -28,18 +28,6 @@ onMounted(() => {});
 // 绑定ref
 const ruleFormRef = ref();
 
-const rules = reactive({
-  pass: [{ validator: validatePass, trigger: "blur", required: true }],
-  checkPass: [{ validator: validatePass2, trigger: "blur", required: true }],
-  age: [
-    {
-      message: "年龄为必填字段",
-      trigger: ["blur", "change"],
-      required: true,
-    },
-  ],
-});
-
 // 密码验证
 const validatePass = (rule, value, callback) => {
   if (value === "") {
@@ -62,13 +50,24 @@ const validatePass2 = (rule, value, callback) => {
   }
 };
 
+const rules = reactive({
+  pass: [{ validator: validatePass, trigger: "blur", required: true }],
+  checkPass: [{ validator: validatePass2, trigger: "blur", required: true }],
+  age: [
+    {
+      message: "年龄为必填字段",
+      trigger: ["blur", "change"],
+      required: true,
+    },
+  ],
+});
+
 // 表单数据
 const ruleForm = reactive({
   pass: "",
   checkPass: "",
   age: "",
 });
-
 
 // 提交数据
 const submitForm = (formEl) => {
