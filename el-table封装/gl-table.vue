@@ -80,3 +80,19 @@ defineExpose({
   getTable,
 });
 </script>
+
+<style lang="scss">
+:deep(.el-table) {
+  .el-table__cell {
+    font-weight: 500;
+    color: #252931;
+    padding: 8px 0;
+    font-family: Microsoft YaHei-Regular, Microsoft YaHei;
+  }
+
+  th.el-table__cell {
+    font-size: 16px;
+    background: #fafafa;
+  }
+}
+</style>
