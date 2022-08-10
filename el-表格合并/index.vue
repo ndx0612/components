@@ -67,7 +67,7 @@ export default {
     };
   },
   created() {
-    // 转换树形结构的数据，⽤来⽅便拆分合并单元格
+    // 数组转换树形结构的数据，⽤来⽅便拆分合并单元格
     this.tableData = [];
     this.oldData.forEach((i) => {
       // 如果有子部门
