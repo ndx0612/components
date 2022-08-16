@@ -35,6 +35,7 @@ const validatePass = (rule, value, callback) => {
   } else {
     if (ruleForm.checkPass !== "") {
       if (!ruleFormRef.value) return;
+      // 调用单个验证
       ruleFormRef.value.validateField("checkPass", () => null);
     }
     callback();
