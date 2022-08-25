@@ -1,4 +1,3 @@
-<!-- npm i vue3-mindmap -->
 <template>
   <div>
     <mindmap class="h-[500px]" v-model="data" :edit="true" :drag="true" :zoom="true" :add-node-btn="true" :ctm="true"></mindmap>
@@ -7,6 +6,8 @@
 </template>
 
 <script setup>
+// vue2版本：https://github.com/hellowuxin/mindmap
+// vue3:版本：npm i vue3-mindmap
 import { getCurrentInstance, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import mindmap from "vue3-mindmap";
