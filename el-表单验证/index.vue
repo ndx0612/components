@@ -19,9 +19,8 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { reactive, ref, onMounted } from "vue";
-import type { FormInstance } from "element-plus";
 
 onMounted(() => {});
 
@@ -41,6 +40,8 @@ const validatePass = (rule, value, callback) => {
     callback();
   }
 };
+
+// 密码确认
 const validatePass2 = (rule, value, callback) => {
   if (value === "") {
     callback(new Error("Please input the password again"));
@@ -56,7 +57,7 @@ const rules = reactive({
   checkPass: [{ validator: validatePass2, trigger: "blur", required: true }],
   age: [
     {
-      message: "年龄为必填字段",
+      message: "age is required",
       trigger: ["blur", "change"],
       required: true,
     },
@@ -89,6 +90,7 @@ const submitForm = (formEl) => {
 // 重置表单
 const resetForm = (formEl) => {
   if (!formEl) return;
-  formEl.resetFields();
+  // formEl.resetFields(); // 重置表单内容，清理验证
+  formEl.clearValidate(); // 重置验证
 };
 </script>
