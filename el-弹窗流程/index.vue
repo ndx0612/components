@@ -59,9 +59,9 @@ let roleForm = reactive({
 const dialog = ref(false);
 
 // 1）关闭-关闭弹窗
-// 2）关闭后-重置所有值
+// 2）关闭后-重置所有值dialogClosed
 // 2）添加-打开弹窗
-// 3）添加后-清空验证
+// 3）添加后-清空验证dialogOpened
 
 /**
  * @description: 重置对象所有值
