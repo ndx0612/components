@@ -58,10 +58,15 @@ let roleForm = reactive({
 
 const dialog = ref(false);
 
+// 基础弹窗√：
+// 1）所有校验均为blur
+// 2）关闭弹窗：弹窗为false，重置校验
+// 3）打开弹窗：清空表单，弹窗为true，
+
 // 1）关闭-关闭弹窗
-// 2）关闭后-重置所有值dialogClosed
-// 2）添加-打开弹窗
-// 3）添加后-清空验证dialogOpened
+// 2）关闭后-重置所有值dialogClosed(也可以打开前清空表单)
+// 3）添加-打开弹窗
+// 4）添加后-清空验证dialogOpened
 
 /**
  * @description: 重置对象所有值
