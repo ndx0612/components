@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div>
-      采购付款列表
-    </div>
-    <el-button @click="aa">按钮</el-button>
   </div>
 </template>
 
@@ -13,70 +9,29 @@ import { useRouter } from "vue-router";
 let router = useRouter();
 const { proxy } = getCurrentInstance();
 const { query } = router.currentRoute.value;
-onMounted(() => {});
-const sortArr = (arr = [], orders = []) => {
-  arr.sort((a, b) => {
-    let result;
-    let over = false;
-    orders.forEach((v) => {
-      if (!over) {
-        if (a[v.column] != b[v.column]) {
-          if (v.asc) result = a[v.column] - b[v.column];
-          else result = b[v.column] - a[v.column];
-          over = true;
-        }
-      }
-    });
-    return result;
-  });
+
+const mySort = (a, b) => {
+  if (a.grade !== b.grade) {
+    return a.grade < b.grade ? -1 : 1;
+  } else if (a.class !== b.class) {
+    return a.class < b.class ? -1 : 1;
+  } else {
+    return a.score - b.score;
+  }
 };
 
-const aa = () => {
-  const obj1 = [
-    {
-      name: "a",
-      age: 65,
-      class: 1,
-    },
-    {
-      name: "b",
-      age: 18,
-      class: 3,
-    },
-    {
-      name: "c",
-      age: 26,
-      class: 1,
-    },
-    {
-      name: "d",
-      age: 50,
-      class: 3,
-    },
-    {
-      name: "e",
-      age: 70,
-      class: 2,
-    },
-    {
-      name: "f",
-      age: 60,
-      class: 3,
-    },
-  ];
-  const obj2 = [
-    {
-      column: "class",
-      asc: true,
-    },
-    {
-      column: "age",
-      asc: true,
-    },
-  ];
-  sortArr(obj1, obj2)
-  console.log(obj1);
-};
+onMounted(() => {
+  proxy.$axios
+    .post(
+      "https://mockapi.eolink.com/RWG4jKY7a8d3c66906979840d6feb92494bd48bd8452ec4/sysDictData/page"
+    )
+    .then((res) => {
+      if (res.errCode == 0) {
+        res.data.records.sort(mySort);
+        console.log(res.data.records);
+      }
+    });
+});
 </script>
 
 <style lang='scss' scoped>
