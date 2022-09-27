@@ -12,8 +12,8 @@
           <el-form-item label="教职工号：" prop="userName">
             <el-input v-model="roleForm.userName" placeholder="请输入教职工号" />
           </el-form-item>
-          <el-form-item label="手机号：" prop="phonenumber">
-            <el-input v-model="roleForm.phonenumber" placeholder="请输入手机号" />
+          <el-form-item label="手机号：" prop="phoneNumber">
+            <el-input v-model="roleForm.phoneNumber" placeholder="请输入手机号" />
           </el-form-item>
           <el-form-item label="部门：">
             <select-dept v-model="roleForm.deptId" multiple placeholder="请选择部门"></select-dept>
@@ -50,7 +50,7 @@ let roleForm = reactive({
   type: "add", // 弹窗类型：add为新增,edit为修改
   nickName: "", // 姓名
   userName: "", // 教职工号
-  phonenumber: "", // 手机号
+  phoneNumber: "", // 手机号
   status: 1,
   deptId: [], // 部门ID
   roleId: [], // 角色ID
