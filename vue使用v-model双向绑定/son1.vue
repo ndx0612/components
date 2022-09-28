@@ -1,5 +1,6 @@
 <template>
-  <div class="w-[300px]">
+  <div class="w-[300px] border-[2px] m-[20px] p-[10px]">
+    <div>子组件的值：{{modelValue}}</div>
     <input :value="modelValue" placeholder="Please input" @input="$emit('update:modelValue', $event.target.value)" />
   </div>
 </template>

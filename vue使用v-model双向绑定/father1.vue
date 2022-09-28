@@ -1,6 +1,7 @@
 <template>
   <div>
     <processSubmit v-model:modelValue="text1"></processSubmit>
+    <div>父组件的值：{{text1}}</div>
     <el-button @click="aa">按钮</el-button>
   </div>
 </template>
