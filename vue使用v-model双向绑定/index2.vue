@@ -8,7 +8,7 @@
 
 <script setup>
 import { ref, defineProps, defineEmits, computed } from "vue";
-defineOptions({ name: "drawer-info" });
+defineOptions({ name: "my-component" });
 const props = defineProps({
   msg: {
     typeof: String,

@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-defineOptions({ name: "drawer-info" });
+defineOptions({ name: "my-component" });
 
 // 这里可以执行一些默认事件
 const emit = defineEmits(["close"]);
@@ -20,7 +20,7 @@ const confirmSelect = () => {
 // 父组件
 <template>
   <div>
-    <drawer-info @close="aa"></drawer-info>
+    <my-component @close="aa"></my-component>
   </div>
 </template>
 

@@ -10,7 +10,7 @@
 // 3、父传子（单向数据流）
 // 注释：在组件内无法修改父组件的值，仅仅接收参数用来展示
 import { ref, defineProps, defineEmits, computed } from "vue";
-defineOptions({ name: "drawer-info" });
+defineOptions({ name: "my-component" });
 const props = defineProps({
   msg: {
     typeof: [String, Number],
@@ -31,7 +31,7 @@ const normalizedSize = computed(() => {
 // 父组件
 <template>
   <div>
-    <drawer-info :msg="str"></drawer-info>
+    <my-component :msg="str"></my-component>
     <h1>父组件的值：{{ str }}</h1>
     <el-button @click="aa">父组件按钮</el-button>
   </div>

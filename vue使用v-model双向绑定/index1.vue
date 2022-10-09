@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-defineOptions({ name: "drawer-info" });
+defineOptions({ name: "my-component" });
 defineProps(["modelValue"]);
 defineEmits(["update:modelValue"]);
 </script>
@@ -20,7 +20,8 @@ defineEmits(["update:modelValue"]);
 
 <script setup>
 import { computed } from "vue";
-defineOptions({ name: "drawer-info" });
+
+defineOptions({ name: "my-component" });
 
 const props = defineProps(["modelValue"]);
 const emit = defineEmits(["update:modelValue"]);
@@ -36,4 +37,4 @@ const value = computed({
 </script>
 
 // 父组件
-<drawer-info v-model="searchText"></drawer-info>
+<my-component v-model="searchText"></my-component>
