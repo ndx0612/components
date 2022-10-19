@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .cover1 {
+      position: relative;
+      width: 300px;
+      height: 400px;
+    }
+
+    img {
+      width: 300px;
+      height: 400px;
+    }
+
+    .cover1::before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 400px;
+      /*最后一个参数是半透明度，可以透过调整0-1的数值，调整到满意的透明度*/
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cover1">
+    <img src="http://mmbiz.qpic.cn/mmbiz_jpg/Efb0Jjzt37OF0QZiboZ…iaVqOhZtrydwGjsCBzNBl5OCJgyvpmibByg/0?wx_fmt=jpeg"
+      alt="">
+  </div>
+
+</body>
+
+</html>
