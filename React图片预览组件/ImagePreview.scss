@@ -1,0 +1,47 @@
+.image-preview-box {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  background-color: rgb(0 0 0 / 50%);
+  z-index: 999;
+}
+
+.picture-preview-operation {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(180deg, rgb(24 26 30 / 0%) 0%, #181a1e 134.38%);
+  z-index: 1001;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.image-preview-show {
+  display: block;
+}
+
+.image-preview-hide {
+  display: none;
+}
+
+.image-preview-img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+  transition: 0.3s;
+}
+
+.picture-preview-operation-hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.picture-preview-operation-show {
+  opacity: 1;
+}
