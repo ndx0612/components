@@ -1,0 +1,17 @@
+// 思路：动态变化最大高度, 同时设置超出部分隐藏
+
+.panel-content {
+  background: tan;
+  margin-top: 10px;
+  overflow: hidden;
+
+  &.collapsed {
+    transition: max-height 2s cubic-bezier(0, 1, 0, 1);
+    max-height: 0;
+  }
+
+  &.expanded {
+    max-height: 999px;
+    transition: max-height 2s;
+  }
+}
